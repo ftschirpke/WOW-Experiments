@@ -1,19 +1,24 @@
+k8sConfig=/home/friedrich/.kube/config
+cluster=cws-kind
+
 # delete kind cluster if it exists
-kind delete cluster --name cws-kind
+sudo kind delete cluster --name $cluster
 
 # clean and create folders for data
 sudo rm -r /tmp/kind/data/shared /dev/shm/kind/localfiles/nodeC /dev/shm/kind/localfiles/node1 /dev/shm/kind/localfiles/node2 /dev/shm/kind/localfiles/node3 /tmp/kind/data/nfs /tmp/kind/data/shared-experiments
 mkdir -p /tmp/kind/data/shared /dev/shm/kind/localfiles/nodeC /dev/shm/kind/localfiles/node1 /dev/shm/kind/localfiles/node2 /dev/shm/kind/localfiles/node3 /tmp/kind/data/nfs /tmp/kind/data/shared-experiments
 
 # create kind cluster
-kind create cluster --config kind-config.yaml
+sudo kind create cluster --config kind-config.yaml --kubeconfig $k8sConfig
+sudo chmod +rw $k8sConfig
+kubectl config set-context --current --namespace=flehmann
 
 #allow scheduling to master
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 
 # label the nodes
 kubectl label nodes --all usedby=flehmann
-kubectl label nodes cws-kind-control-plane management=true
+kubectl label nodes $cluster-control-plane management=true
 
 # set namespace to flehmann
 kubectl create ns flehmann

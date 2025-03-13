@@ -9,11 +9,14 @@ metadata:
 spec:
   containers:
   - env:
+    - name: spring_profiles_active
+      value: dev
     - name: SCHEDULER_NAME
       value: workflow-scheduler
     - name: AUTOCLOSE
       value: "false"
     image: fabianlehmann/test1:sch_v201
+    # image: fabianlehmann/test1:sch_v303
     imagePullPolicy: Always
     name: workflow-scheduler
     resources:
