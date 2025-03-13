@@ -15,8 +15,7 @@ spec:
       value: workflow-scheduler
     - name: AUTOCLOSE
       value: "false"
-    image: fabianlehmann/test1:sch_v201
-    # image: fabianlehmann/test1:sch_v303
+    image: commonworkflowscheduler/kubernetesscheduler:2.0
     imagePullPolicy: Always
     name: workflow-scheduler
     resources:

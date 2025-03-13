@@ -75,7 +75,9 @@ waitForNodes(){
 if [ "$NXF_ORIG" = true ] ; then
     runs=( orig )
 else
-    runs=( la cws )
+    # runs=( la cws )
+    # runs=( la )
+    runs=( cws )
 fi
 
 for workflow in "${workflows[@]}"
@@ -153,7 +155,7 @@ do
                 profile="-profile $(cat /experiments/experiment/$workflow/profile.txt)"
             fi
             waitForNodes
-            nextflow run /input/$workflow $profile -c /experiments/experiment/$workflow/nextflow.config -c /experiments/experiment/nextflow_$run.config -c /experiments/experiment/nextflow_$storage.config
+            nextflow run /input/$workflow $profile -c /experiments/experiment/$workflow/nextflow.config -c /experiments/experiment/nextflow_$run-plugin.config -c /experiments/experiment/nextflow_$storage.config
             cd ..
 
             error=false

@@ -6,7 +6,7 @@ sudo kind delete cluster --name $cluster
 
 # clean and create folders for data
 sudo rm -r /tmp/kind/data/shared /dev/shm/kind/localfiles/nodeC /dev/shm/kind/localfiles/node1 /dev/shm/kind/localfiles/node2 /dev/shm/kind/localfiles/node3 /tmp/kind/data/nfs /tmp/kind/data/shared-experiments
-mkdir -p /tmp/kind/data/shared /dev/shm/kind/localfiles/nodeC /dev/shm/kind/localfiles/node1 /dev/shm/kind/localfiles/node2 /dev/shm/kind/localfiles/node3 /tmp/kind/data/nfs /tmp/kind/data/shared-experiments
+sudo mkdir -p /tmp/kind/data/shared /dev/shm/kind/localfiles/nodeC /dev/shm/kind/localfiles/node1 /dev/shm/kind/localfiles/node2 /dev/shm/kind/localfiles/node3 /tmp/kind/data/nfs /tmp/kind/data/shared-experiments
 
 # create kind cluster
 sudo kind create cluster --config kind-config.yaml --kubeconfig $k8sConfig
