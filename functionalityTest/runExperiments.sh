@@ -15,7 +15,7 @@ fi
 speed=$2
 reruns=3 # Runs for each workflow + 1
 namespace=$(cat namespace.txt)
-workflows=( chain fork group groupMultiple allIntoOne )
+workflows=( groupMultiple allIntoOne chain fork group )
 nodes="4nodes"
 
 collectData() {
