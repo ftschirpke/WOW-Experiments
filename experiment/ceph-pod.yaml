@@ -5,12 +5,10 @@ metadata:
 spec:
   containers:
   - name: nextflow
-    # image: fabianlehmann/test1:nxf_v303
-    # image: fabianlehmann/test1:nxf_vla_exp
     # image: friedricht/nf-cws-ref:latest
-    # image: friedricht/nf-cws-wow:latest
+    image: friedricht/nf-cws-wow:latest
     # image: nf-adjusted:latest
-    image: nf-orig:latest
+    # image: nf-orig:latest
     imagePullPolicy: Never
     command:
       - /bin/sh

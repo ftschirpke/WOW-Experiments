@@ -76,8 +76,8 @@ if [ "$NXF_ORIG" = true ] ; then
     runs=( orig )
 else
     # runs=( la cws )
-    # runs=( la )
-    runs=( cws )
+    runs=( la )
+    # runs=( cws )
 fi
 
 for workflow in "${workflows[@]}"
