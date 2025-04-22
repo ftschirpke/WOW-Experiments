@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    friedrich: shell
+  name: ft-nodes-for-tcconfig
+  namespace: ftschirpke
+spec:
+  selector:
+    matchLabels:
+      name: ft-nodes-for-tcconfig
+  template:
+    metadata:
+      labels:
+        friedrich: tcconfig-shell
+        name: ft-nodes-for-tcconfig
+    spec:
+      nodeSelector:
+        usedby: ftschirpke
+      volumes:
+      - name: input
+        persistentVolumeClaim:
+          claimName: ceph-data
+      - name: exp
+        persistentVolumeClaim:
+          claimName: ceph-exp
+      containers:
+      - name: main
+        command:
+          - /bin/sh
+          - "-c"
+          - "apt-get update && apt-get install -y fio && sleep infinity"
+        image: thombashi/tcconfig
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /input
+            name: input
+          - mountPath: /experiments
+            name: exp
+        name: shell
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
+      preemptionPolicy: PreemptLowerPriority
+      priority: 2000001000
+      priorityClassName: system-node-critical

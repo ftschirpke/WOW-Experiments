@@ -1,0 +1,156 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: workflow-prepare
+spec:
+  selector:
+    matchLabels:
+      name: workflow-prepare
+  template:
+    metadata:
+      labels:
+        name: workflow-prepare
+    spec:
+      nodeSelector:
+        usedby: ftschirpke
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - sleep infinity
+        image: alpine
+        name: c1
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/p7zip:15.09--h2d50403_4
+        imagePullPolicy: IfNotPresent
+        name: init0
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/gawk:5.1.0
+        imagePullPolicy: IfNotPresent
+        name: init1
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/cnvkit:0.9.9--pyhdfd78af_0
+        imagePullPolicy: IfNotPresent
+        name: init2
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/tabix:1.11--hdfd78af_0
+        imagePullPolicy: IfNotPresent
+        name: init3
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/fastp:0.23.2--h79da9fb_0
+        imagePullPolicy: IfNotPresent
+        name: init4
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/fastqc:0.11.9--0
+        imagePullPolicy: IfNotPresent
+        name: init5
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:219b6c272b25e7e642ae3ff0bf0c5c81a5135ab4-0
+        imagePullPolicy: IfNotPresent
+        name: init6
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/mulled-v2-d9e7bad0f7fbc8f4458d5c3ab7ffaaf0235b59fb:551156018e5580fb94d44632dfafbc9c27005a0e-0
+        imagePullPolicy: IfNotPresent
+        name: init7
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/samtools:1.16.1--h6899075_1
+        imagePullPolicy: IfNotPresent
+        name: init8
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/gatk4:4.3.0.0--py36hdfd78af_0
+        imagePullPolicy: IfNotPresent
+        name: init9
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/mosdepth:0.3.3--hdfd78af_1
+        imagePullPolicy: IfNotPresent
+        name: init10
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/strelka:2.9.10--h9ee0642_1
+        imagePullPolicy: IfNotPresent
+        name: init11
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/bcftools:1.16--hfe4b78e_1
+        imagePullPolicy: IfNotPresent
+        name: init12
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/tiddit:3.3.2--py310hc2b7f4b_0
+        imagePullPolicy: IfNotPresent
+        name: init13
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/mulled-v2-780d630a9bb6a0ff2e7b6f730906fd703e40e98f:3bdd798e4b9aed6d3e1aaa1596c913a3eeb865cb-0
+        imagePullPolicy: IfNotPresent
+        name: init14
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/pigz:2.3.4
+        imagePullPolicy: IfNotPresent
+        name: init15
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/vcftools:0.1.16--he513fc3_4
+        imagePullPolicy: IfNotPresent
+        name: init16
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/multiqc:1.13--pyhdfd78af_0
+        imagePullPolicy: IfNotPresent
+        name: init17
+      - command:
+        - sh
+        - -c
+        - exit 0
+        image: quay.io/biocontainers/multiqc:1.14--pyhdfd78af_0
+        imagePullPolicy: IfNotPresent
+        name: init18

@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nextflow
+spec:
+  nodeSelector: 
+    ftschirpkespecial: nfpod
+  containers:
+  - name: nextflow
+    image: friedricht/nextflow:wow_v0.1.0
+    imagePullPolicy: Always
+    command:
+      - /bin/sh
+      - "-c"
+      - "sleep infinity"
+    workingDir: /experiments/experiment
+    env:
+    - name: NXF_WORK
+      value: /input/data/work/
+    - name: NXF_ANSI_LOG
+      value: 'false'
+    volumeMounts:
+      - mountPath: /input
+        name: input
+      - mountPath: /experiments
+        name: exp
+      - mountPath: /nfs
+        name: nfs
+        readOnly: true
+    securityContext:
+      runAsUser: 0
+    resources:
+      requests: 
+        memory: 3G
+  serviceAccountName: nextflow-ftschirpke
+  volumes:
+  - name: input
+    persistentVolumeClaim:
+      claimName: ceph-data
+  - name: exp
+    persistentVolumeClaim:
+      claimName: ceph-exp
+  - name: nfs
+    persistentVolumeClaim:
+      claimName: nfs-data
+      readOnly: true
+  securityContext:
+    runAsUser: 0

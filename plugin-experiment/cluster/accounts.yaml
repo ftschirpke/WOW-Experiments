@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nextflow-ftschirpke
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cwsscheduleraccount-ftschirpke
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nextflow-pod-role-ftschirpke
+  namespace: ftschirpke
+rules:
+ - apiGroups: [""]
+   resources: ["pods","pods/status","pods/log","nodes","configmaps","pods/exec", "secrets"]
+   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+ - apiGroups: ["apps"]
+   resources: ["daemonsets"]
+   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+   name: nextflow-pod-role-binding-ftschirpke
+   namespace: ftschirpke
+subjects:
+ - kind: ServiceAccount
+   name: nextflow-ftschirpke
+   namespace: ftschirpke
+roleRef:
+   kind: ClusterRole
+   name: nextflow-pod-role-ftschirpke
+   apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cwsschedulerrole-ftschirpke
+  namespace: ftschirpke
+rules:
+ - apiGroups: [""]
+   resources: ["pods","pods/status","pods/exec","nodes","bindings","configmaps","nodes"]
+   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+ - apiGroups: ["metrics.k8s.io"]
+   resources: ["nodes"]
+   verbs: ["get","list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+   name: cwsschedulerbinding-ftschirpke
+   namespace: ftschirpke
+subjects:
+ - kind: ServiceAccount
+   name: cwsscheduleraccount-ftschirpke
+   namespace: ftschirpke
+roleRef:
+   kind: ClusterRole
+   name: cwsschedulerrole-ftschirpke
+   apiGroup: rbac.authorization.k8s.io

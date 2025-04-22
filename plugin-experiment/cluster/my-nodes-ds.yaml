@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    friedrich: shell
+  name: ft-nodes
+  namespace: ftschirpke
+spec:
+  selector:
+    matchLabels:
+      name: ft-nodes
+  template:
+    metadata:
+      labels:
+        friedrich: shell
+        name: ft-nodes
+    spec:
+      nodeSelector:
+        usedby: ftschirpke
+      containers:
+      - name: main
+        image: ubuntu:latest
+        command:
+          - /bin/bash
+          - "-c"
+          - "sleep infinity"
