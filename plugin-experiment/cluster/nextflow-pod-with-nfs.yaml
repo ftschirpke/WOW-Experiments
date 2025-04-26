@@ -7,7 +7,7 @@ spec:
     ftschirpkespecial: nfpod
   containers:
   - name: nextflow
-    image: friedricht/nextflow:wow_v0.1.0
+    image: nextflow/nextflow:25.01.0-edge
     imagePullPolicy: Always
     command:
       - /bin/sh
@@ -15,6 +15,8 @@ spec:
       - "sleep infinity"
     workingDir: /experiments/experiment
     env:
+    - name: NXF_OPTS
+      value: '--add-exports=java.base/sun.net.ftp=ALL-UNNAMED'
     - name: NXF_WORK
       value: /input/data/work/
     - name: NXF_ANSI_LOG
