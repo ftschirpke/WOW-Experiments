@@ -5,9 +5,7 @@ metadata:
 spec:
   containers:
   - name: nextflow
-    # image: friedricht/nf-cws-ref:latest
-    image: friedricht/nf-cws-wow:latest
-    # image: nf-adjusted:latest
+    image: nf-adjusted:latest
     # image: nf-orig:latest
     imagePullPolicy: Never
     command:

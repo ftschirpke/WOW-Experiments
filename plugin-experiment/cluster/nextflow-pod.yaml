@@ -26,6 +26,8 @@ spec:
         name: input
       - mountPath: /experiments
         name: exp
+      - mountPath: /localdata
+        name: local
     securityContext:
       runAsUser: 0
     resources:
@@ -39,5 +41,8 @@ spec:
   - name: exp
     persistentVolumeClaim:
       claimName: ceph-exp
+  - name: local
+    hostPath:
+      path: /localdata
   securityContext:
     runAsUser: 0

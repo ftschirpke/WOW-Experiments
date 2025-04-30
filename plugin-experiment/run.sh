@@ -4,7 +4,7 @@ results_dir=/experiments/wow_plugin_results
 namespace=ftschirpke
 
 # experiment 1
-workflows=( rnaseq_test )
+workflows=( chipseq_test rnaseq_test sarek_test )
 # runs=( online_tarema vanilla )
 runs=( wow_plugin )
 reruns=2
@@ -51,6 +51,9 @@ cleanup(){
     kubectl delete ds -l app=nextflow --wait
     kubectl delete pods -l app=nextflow --wait
     kubectl delete pods -l nextflow.io/app=nextflow --wait
+    kubectl apply -f cluster/cleaner-ds.yaml --wait
+    kubectl rollout status daemonset cleaner
+    kubectl delete -f cluster/cleaner-ds.yaml --wait
     rm /input/data -rf
     rm launch -rf
     kubectl delete pod workflow-scheduler --wait

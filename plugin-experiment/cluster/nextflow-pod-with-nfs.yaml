@@ -29,6 +29,8 @@ spec:
       - mountPath: /nfs
         name: nfs
         readOnly: true
+      - mountPath: /localdata
+        name: local
     securityContext:
       runAsUser: 0
     resources:
@@ -46,5 +48,8 @@ spec:
     persistentVolumeClaim:
       claimName: nfs-data
       readOnly: true
+  - name: local
+    hostPath:
+      path: /localdata
   securityContext:
     runAsUser: 0

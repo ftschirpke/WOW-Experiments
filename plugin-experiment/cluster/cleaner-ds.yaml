@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: cleaner
+  namespace: ftschirpke
+spec:
+  template:
+    metadata:
+      labels: 
+        name: cleaner
+    spec:
+      nodeSelector:
+        usedby: ftschirpke
+      containers:
+      - name: start
+        image: alpine
+        command:
+          - /bin/sh
+          - "-c"
+          - "sleep infinity"
+      initContainers:
+      - name: cleaner
+        image: ubuntu
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "rm -rf /localdata/*" ]
+        volumeMounts:
+        - name: vol-1
+          mountPath: /localdata
+        imagePullPolicy: IfNotPresent
+      volumes:
+      - name: vol-1
+        hostPath: 
+          path: /localdata
+  selector:
+    matchLabels: 
+      name: cleaner
