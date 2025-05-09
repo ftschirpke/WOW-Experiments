@@ -6,8 +6,8 @@ namespace=ftschirpke
 # experiment 1
 workflows=( chipseq_test rnaseq_test sarek_test )
 # runs=( online_tarema vanilla )
-runs=( wow_plugin )
-reruns=2
+runs=( cws_plugin wow_plugin )
+reruns=3
 
 # experiment 2
 # workflows=( sarek )
