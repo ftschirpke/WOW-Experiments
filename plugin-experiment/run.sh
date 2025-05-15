@@ -4,10 +4,10 @@ results_dir=/experiments/wow_plugin_results
 namespace=ftschirpke
 
 # experiment 1
-workflows=( chipseq_test rnaseq_test sarek_test )
+workflows=( rnaseq_test sarek_test chipseq_test )
 # runs=( online_tarema vanilla )
 runs=( cws_plugin wow_plugin )
-reruns=3
+reruns=1
 
 # experiment 2
 # workflows=( sarek )
