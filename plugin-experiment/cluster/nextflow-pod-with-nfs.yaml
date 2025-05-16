@@ -7,7 +7,7 @@ spec:
     ftschirpkespecial: nfpod
   containers:
   - name: nextflow
-    image: nextflow/nextflow:25.01.0-edge
+    image: nextflow/nextflow:25.02.3-edge
     imagePullPolicy: Always
     command:
       - /bin/sh
