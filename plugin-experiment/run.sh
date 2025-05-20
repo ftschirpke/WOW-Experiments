@@ -124,17 +124,12 @@ do
             fi
             waitForNodes
 
-            plugins_flag="-plugins nf-cws@1.1.0"
-            if [ $run = "vanilla" ]; then
-                plugins_flag=""
-            fi 
-
             nextflow -v
 
             nextflow run /input/workflows/$workflow $profile $plugins_flag \
                 -c /experiments/experiment/$workflow/nextflow.config \
-                -c /experiments/experiment/configs/nextflow_$run.config \
-                -c /experiments/experiment/configs/nextflow_main.config
+                -c /experiments/experiment/configs/nextflow_main.config \
+                -c /experiments/experiment/configs/nextflow_$run.config
 
             echo "workflow: $workflow $run ($trial): workflow finished, collecting results"
 
